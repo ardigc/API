@@ -8,7 +8,7 @@ button.addEventListener('click', async () => {
 });
 
 saveBtn.addEventListener('click', async () => {
-    const request = await fetch('/api/save', {
+    const request = await fetch('/api/save?id=8', {
         method: 'POST',
         body: JSON.stringify({ message: Math.random().toString(36) }),
         headers: {
