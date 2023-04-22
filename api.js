@@ -33,8 +33,14 @@ app.get('/api/message', (req, res) => {
     res.send('Mandado desde la api');
 });
 
-app.post('/api/save', (req, res) => {
-    console.log(req.body);
+app.post('/api/save', async (req, res) => {
+    const msg = req.body.message;
+    const pathName = path.join(__dirname, 'msg.txt');
+    const file = await fs.readFile(pathName);
+    const txt = file.toString('utf8');
+    const newText = `${txt}
+${msg}`;
+    fs.writeFile(pathName, newText);
     res.statusCode = 200;
     res.setHeader(
         'Access-Control-Allow-Methods',

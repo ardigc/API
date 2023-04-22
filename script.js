@@ -10,7 +10,7 @@ button.addEventListener('click', async () => {
 saveBtn.addEventListener('click', async () => {
     const request = await fetch('/api/save', {
         method: 'POST',
-        body: JSON.stringify({ message: 'Mensaje enviado desde el front' }),
+        body: JSON.stringify({ message: Math.random().toString(36) }),
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
