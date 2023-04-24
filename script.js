@@ -2,7 +2,7 @@ const search = new URLSearchParams(window.location.search);
 // const url = window.location.href
 const id= search.get("id");
 console.log(id)
-const button = document.querySelector('.btn');
+// const button = document.querySelector('.btn');
 const saveBtn = document.querySelector('.save');
 
 button.addEventListener('click', async () => {
@@ -59,6 +59,7 @@ main()
           const prod = createProduct(productsID)
           gridProduct.append(prod);
           function createProduct(product) {
+          const buyButton = document.querySelector('.buy-button');
             const productBox = createElement('div', 'product-box',);
             const nameBox = createElement('div', 'name-box', product.name)
             const descriptionBox = createElement('div', 'item-box', product.description)
@@ -69,6 +70,9 @@ main()
             productBox.append(descriptionBox)
             productBox.append(priceBox)
             productBox.append(buttonBox)
+            buyButton.addEventListener("click", async (ev) => {
+
+            })
             return productBox
         }
           }
@@ -89,7 +93,7 @@ function createElement(tag, styles, content) {
     return element;
   }
 // saveBtn.addEventListener('click', async () => {
-//     const request = await fetch('/api/save?id=8', {
+//     const request = await fetch('/api/save', {
 //         method: 'POST',
 //         body: JSON.stringify({ message: Math.random().toString(36) }),
 //         headers: {
