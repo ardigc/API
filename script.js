@@ -83,6 +83,7 @@ main()
                 },
             });
             const message = await request.text();
+            // callCart()
             // console.log(message)
             })
             return productBox
@@ -107,7 +108,8 @@ function createItem(item) {
   // console.log()
   return itemBox;
 }
-function renderizarCarro(carro) {
+function renderizarCarro(carrito) {
+  const showCarrito = document.querySelector(".carrito");
   const carritoList = carrito.map(createItem);
   showCarrito.append(...carritoList);
   let totalPrice = 0;
@@ -121,15 +123,15 @@ function renderizarCarro(carro) {
   );
 }
 async function callCart() {
-  const request = await fetch('/api/shopping', {
+  const response = await fetch('/api/shopping', {
     method: 'GET',
-    body: JSON.stringify({ message: product }),
-    headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-    },
+  })
+    const body = await response.json();
+    renderizarCarro(body)
+    return body;
 }
-  )}
+callCart()
+
 function createElement(tag, styles, content) {
     const element = document.createElement(tag);
     element.setAttribute("class", styles);
