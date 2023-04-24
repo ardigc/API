@@ -1,3 +1,7 @@
+const search = new URLSearchParams(window.location.search);
+// const url = window.location.href
+const id= search.get("id");
+console.log(id)
 const button = document.querySelector('.btn');
 const saveBtn = document.querySelector('.save');
 
@@ -7,6 +11,7 @@ button.addEventListener('click', async () => {
     alert(message);
 });
 //   Deteniendo ejecución
+if (!id === !null) {
   async function getProduct() {
       const response = await fetch('/api/products', {
           method: "GET",
@@ -22,8 +27,24 @@ button.addEventListener('click', async () => {
           const prod = products.map(createProduct)
           gridProduct.append(...prod);
         }
+
+     function createProduct(product) {
+    const productBox = createElement('div', 'product-box',);
+    const nameBox = createElement('div', 'name-box', product.name)
+    const descriptionBox = createElement('div', 'item-box', product.description)
+    const priceBox = createElement('div', 'price-box', product.price+"€")
+    productBox.append(nameBox)
+    productBox.append(descriptionBox)
+    productBox.append(priceBox)
+    productBox.addEventListener("click", (ev) => {
+    window.location.assign(window.location.href+"?id="+id)
+  });
+    return productBox
+}
+main()
+}else{
         async function getProductID() {
-            const response = await fetch('/api/products/8', {
+            const response = await fetch('/api/products/'+id, {
                 method: "GET",
             });
             const body = await response.json();
@@ -35,17 +56,7 @@ button.addEventListener('click', async () => {
             console.log(productsID)
           }
           prueba()
-     function createProduct(product) {
-    const productBox = createElement('div', 'product-box',);
-    const nameBox = createElement('div', 'name-box', product.name)
-    const descriptionBox = createElement('div', 'item-box', product.description)
-    const priceBox = createElement('div', 'price-box', product.price+"€")
-    productBox.append(nameBox)
-    productBox.append(descriptionBox)
-    productBox.append(priceBox)
-    return productBox
 }
-        main()
     
 function createElement(tag, styles, content) {
     const element = document.createElement(tag);
