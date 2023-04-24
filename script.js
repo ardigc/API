@@ -37,7 +37,7 @@ if (!id === !null) {
     productBox.append(descriptionBox)
     productBox.append(priceBox)
     productBox.addEventListener("click", (ev) => {
-    window.location.assign(window.location.href+"?id="+id)
+    window.location.assign(window.location.href+"?id="+product.id)
   });
     return productBox
 }
@@ -54,6 +54,19 @@ main()
         async function prueba() {
             const productsID = await getProductID()
             console.log(productsID)
+            const gridProduct = document.querySelector('.grid-products')
+          const prod = createProduct(productsID)
+          gridProduct.append(prod);
+          function createProduct(product) {
+            const productBox = createElement('div', 'product-box',);
+            const nameBox = createElement('div', 'name-box', product.name)
+            const descriptionBox = createElement('div', 'item-box', product.description)
+            const priceBox = createElement('div', 'price-box', product.price+"€")
+            productBox.append(nameBox)
+            productBox.append(descriptionBox)
+            productBox.append(priceBox)
+            return productBox
+        }
           }
           prueba()
 }
