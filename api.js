@@ -1,16 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const fs = require('fs/promises');
-const path = require('path');
-
-const app = express();
 
 const products = [
     {
         name: 'Oriental Concrete Gloves',
         price: '374.00',
         description:
-            'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016',
+        'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016',
         qt: 1,
         ide: 1,
     },
@@ -50,7 +44,7 @@ const products = [
         name: 'Tasty Concrete Bacon',
         price: '40.00',
         description:
-            'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart',
+        'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart',
         qt: 1,
         ide: 6,
     },
@@ -74,7 +68,7 @@ const products = [
         name: 'Fantastic Bronze Pants',
         price: '182.00',
         description:
-            'The Football Is Good For Training And Recreational Purposes',
+        'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
         ide: 9,
     },
@@ -82,7 +76,7 @@ const products = [
         name: 'Rustic Steel Hat',
         price: '267.00',
         description:
-            'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
+        'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
         qt: 1,
         ide: 11,
     },
@@ -90,7 +84,7 @@ const products = [
         name: 'Rustic Soft Chips',
         price: '553.00',
         description:
-            'The Football Is Good For Training And Recreational Purposes',
+        'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
         ide: 12,
     },
@@ -107,14 +101,14 @@ const products = [
         price: '133.00',
         description:
             'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
-        qt: 1,
-        ide: 14,
+            qt: 1,
+            ide: 14,
     },
     {
         name: 'Rustic Wooden Bacon',
         price: '264.00',
         description:
-            'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
+        'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
         qt: 1,
         ide: 15,
     },
@@ -123,9 +117,9 @@ const products = [
         price: '108.00',
         description:
             'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart',
-        qt: 1,
-        ide: 16,
-    },
+            qt: 1,
+            ide: 16,
+        },
     {
         name: 'Luxurious Steel Pants',
         price: '680.00',
@@ -139,13 +133,13 @@ const products = [
         price: '254.00',
         description:
             'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design',
-        qt: 1,
-        ide: 18,
-    },
-    {
-        name: 'Unbranded Metal Shirt',
-        price: '703.00',
-        description:
+            qt: 1,
+            ide: 18,
+        },
+        {
+            name: 'Unbranded Metal Shirt',
+            price: '703.00',
+            description:
             'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
         ide: 19,
@@ -154,7 +148,7 @@ const products = [
         name: 'Luxurious Granite Mouse',
         price: '255.00',
         description:
-            'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
+        'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
         qt: 1,
         ide: 20,
     },
@@ -162,11 +156,17 @@ const products = [
         name: 'Incredible Rubber Salad',
         price: '589.00',
         description:
-            'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit',
+        'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit',
         qt: 1,
         ide: 21,
     },
 ];
+const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs/promises');
+const path = require('path');
+
+const app = express();
 
 app.use(bodyParser.json());
 
@@ -194,6 +194,17 @@ app.get('/api/message', (req, res) => {
         'Content-Type, Authorization'
     );
     res.send('Mandado desde la api');
+});
+app.get('/api/products', (req, res) => {
+    
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    );
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify(products));
 });
 
 app.post('/api/save', async (req, res) => {
