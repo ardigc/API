@@ -253,9 +253,21 @@ ${msg}`;
     );
     res.send('Mandado desde la api');
 });
+app.get('/api/shopping', async (req, res) => {
+    const pathName = path.join(__dirname, 'cart.json');
+    const file = await fs.readFile(pathName);
+    const txt = file.toString('utf8');
+    const data = JSON.parse(txt) 
+    res.statusCode = 200;
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET'); 
+        res.send(data);
+    
+})
 app.post('/api/shopping', async (req, res) => {
     const msg = req.body.message;
-    console.log(msg)
+    // console.log(msg)
     const pathName = path.join(__dirname, 'cart.json');
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');

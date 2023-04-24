@@ -1,7 +1,7 @@
 const search = new URLSearchParams(window.location.search);
 // const url = window.location.href
 const id= search.get("id");
-console.log(id)
+// console.log(id)
 // const button = document.querySelector('.btn');
 const saveBtn = document.querySelector('.save');
 const intro = document.querySelector('.intro')
@@ -26,7 +26,7 @@ if (!id === !null) {
     //   console.log(getProduct());
       async function main() {
           const products = await getProduct()
-          console.log(products)
+          // console.log(products)
           const gridProduct = document.querySelector('.grid-products')
           const prod = products.map(createProduct)
           gridProduct.append(...prod);
@@ -57,7 +57,7 @@ main()
        
         async function prueba() {
             const productsID = await getProductID()
-            console.log(productsID)
+            // console.log(productsID)
             const gridProduct = document.querySelector('.grid-products')
             gridProduct.setAttribute('class', 'grid-product')
           const prod = createProduct(productsID)
@@ -83,7 +83,7 @@ main()
                 },
             });
             const message = await request.text();
-            console.log(message)
+            // console.log(message)
             })
             return productBox
         }
@@ -91,6 +91,45 @@ main()
           prueba()
 }
     
+function createItem(item) {
+  // console.log(item);
+  const nameBox = createElement("div", "item-name", item.name);
+  // const descriptionBox = createElement("div", "item-description", item.description)
+  const priceBox = createElement(
+    "div",
+    "item-price",
+    "Unidades " + item.qt + "   " + item.price + "€"
+  );
+  const itemBox = createElement("div", "item-box");
+  itemBox.append(nameBox);
+  // itemBox.append(descriptionBox);
+  itemBox.append(priceBox);
+  // console.log()
+  return itemBox;
+}
+function renderizarCarro(carro) {
+  const carritoList = carrito.map(createItem);
+  showCarrito.append(...carritoList);
+  let totalPrice = 0;
+  for (let x = 0; x < carrito.length; x++) {
+    const currentPrice = parseFloat(carrito[x].price);
+    totalPrice = totalPrice + currentPrice * carrito[x].qt;
+  }
+  // console.log(totalPrice)
+  showCarrito.append(
+    createElement("div", "total-price", "Total price is " + totalPrice + "€")
+  );
+}
+async function callCart() {
+  const request = await fetch('/api/shopping', {
+    method: 'GET',
+    body: JSON.stringify({ message: product }),
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+    },
+}
+  )}
 function createElement(tag, styles, content) {
     const element = document.createElement(tag);
     element.setAttribute("class", styles);
@@ -104,6 +143,7 @@ function createElement(tag, styles, content) {
     }
     return element;
   }
+  
 saveBtn.addEventListener('click', async () => {
     const request = await fetch('/api/save', {
         method: 'POST',
@@ -114,5 +154,5 @@ saveBtn.addEventListener('click', async () => {
         },
     });
     const message = await request.text();
-    console.log(message);
+    // console.log(message);
 });

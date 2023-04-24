@@ -38,3 +38,78 @@
     display: flex;
     justify-content: flex-end;
 }
+.carrito{
+    position: fixed;
+    display: grid;
+    background-color: beige;
+    grid-template-rows: repeat(22, 2.52rem);
+    height: 100%;
+    left: 0;
+    top: 7rem;
+    align-items: top;
+    overflow: hidden;
+    border: solid 1px black;
+    z-index: 1;
+}
+.item-box{
+    min-width: 5rem;
+    height: 100%;
+    background-color: beige;
+    border: solid 1px black;
+}
+.total-price{
+    display: flex;
+    min-width: 5rem;
+    height: 100%;
+    background-color: rgb(182, 182, 161);
+    border: solid 1px black;
+    justify-content: end;
+    align-items: end;
+}
+.fuera{
+    
+    width: 0px;
+    z-index: 1;
+    animation-name: carrito-compra-fuera;
+    animation-duration: 0.5s;
+}
+.show{
+    width: 20rem;
+    animation-name: carrito-compra;
+    animation-duration: 0.5s;
+}
+.item-name{
+    display: flex;
+    /* height: 2rem; */
+    padding-top: 1px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: beige;
+}
+.item-price{
+    background-color: beige;
+    display: flex;
+    color: black;
+    justify-content: end;
+    /* padding: 1.5rem; */
+    
+}
+.item-description{
+    background-color: rgb(165, 119, 184);
+    padding: 1rem;
+}
+@keyframes carrito-compra {
+    from{
+width: 0;
+    } to{
+width: 20rem;
+    }
+}
+@keyframes carrito-compra-fuera {
+    from{
+width: 20rem;
+    } to{
+width: 0rem;
+    }
+}
