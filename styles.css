@@ -5,7 +5,28 @@
 }
 .grid-products{
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 .product-box{
+    display: grid;
+    grid-template-rows: 2rem 1fr 2rem;
+    border: solid 1px black;
+}
+.name-box{
     display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+.item-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+.price-box{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 8px;
 }

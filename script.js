@@ -22,10 +22,27 @@ button.addEventListener('click', async () => {
           const prod = products.map(createProduct)
           gridProduct.append(...prod);
         }
-function createProduct(product) {
+        async function getProductID() {
+            const response = await fetch('/api/products/8', {
+                method: "GET",
+            });
+            const body = await response.json();
+            return body;
+        }
+       
+        async function prueba() {
+            const productsID = await getProductID()
+            console.log(productsID)
+          }
+          prueba()
+     function createProduct(product) {
     const productBox = createElement('div', 'product-box',);
     const nameBox = createElement('div', 'name-box', product.name)
+    const descriptionBox = createElement('div', 'item-box', product.description)
+    const priceBox = createElement('div', 'price-box', product.price+"€")
     productBox.append(nameBox)
+    productBox.append(descriptionBox)
+    productBox.append(priceBox)
     return productBox
 }
         main()

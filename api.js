@@ -193,6 +193,7 @@ app.get('/styles.css', async (req, res) => {
     res.send(file);
 });
 
+
 app.get('/api/message', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -202,7 +203,7 @@ app.get('/api/message', (req, res) => {
     );
     res.send('Mandado desde la api');
 });
-app.get('/api/products', (req, res) => {
+app.get('/api/products/', (req, res) => {
     
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -213,7 +214,26 @@ app.get('/api/products', (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify(products));
 });
+app.get('/api/products/:id', (req, res) => {
+    const id = req.params.id 
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    );
+    // console.log(products)
+    const index = products.find((element) => element.id == id);
+    // console.log(index)
+    res.setHeader('Content-Type', 'application/json')
+    res.send(JSON.stringify(index));
+});
 
+
+// app.get('/user/:id', function (req, res) {
+//     console.log('and this matches too')
+//     res.end()
+//   })
 app.post('/api/save', async (req, res) => {
     const msg = req.body.message;
     const pathName = path.join(__dirname, 'msg.txt');
