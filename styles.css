@@ -7,6 +7,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
+.grid-product{
+    display: grid;
+    grid-template-columns: 1fr;
+}
 .product-box{
     display: grid;
     grid-template-rows: 2rem 1fr 2rem;
@@ -29,4 +33,8 @@
     justify-content: flex-end;
     align-items: center;
     padding: 8px;
+}
+.button-box{
+    display: flex;
+    justify-content: flex-end;
 }

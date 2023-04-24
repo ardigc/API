@@ -55,6 +55,7 @@ main()
             const productsID = await getProductID()
             console.log(productsID)
             const gridProduct = document.querySelector('.grid-products')
+            gridProduct.setAttribute('class', 'grid-product')
           const prod = createProduct(productsID)
           gridProduct.append(prod);
           function createProduct(product) {
@@ -62,9 +63,12 @@ main()
             const nameBox = createElement('div', 'name-box', product.name)
             const descriptionBox = createElement('div', 'item-box', product.description)
             const priceBox = createElement('div', 'price-box', product.price+"€")
+            const button = createElement("button", "buy-button", "comprar");
+            const buttonBox = createElement("div", "button-box", button);
             productBox.append(nameBox)
             productBox.append(descriptionBox)
             productBox.append(priceBox)
+            productBox.append(buttonBox)
             return productBox
         }
           }
