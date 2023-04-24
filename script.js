@@ -79,6 +79,7 @@ main()
                 },
             });
             const message = await request.text();
+            console.log(message)
             })
             return productBox
         }

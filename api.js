@@ -255,12 +255,20 @@ ${msg}`;
 });
 app.post('/api/shopping', async (req, res) => {
     const msg = req.body.message;
-    const pathName = path.join(__dirname, 'cart.txt');
+    console.log(msg)
+    const pathName = path.join(__dirname, 'cart.json');
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');
-    const newText = `${txt}
-${msg}`;
-    fs.writeFile(pathName, newText);
+    if (txt.length===0) {
+        fs.writeFile(pathName, JSON.stringify([msg]))
+    } else {
+    console.log(txt)
+    const data = JSON.parse(txt)
+    const newFile = data.push(msg)
+    // const newFile = `${data}
+// ${msg}`;
+    fs.writeFile(pathName, JSON.stringify(data));
+    }
     res.statusCode = 200;
     res.setHeader(
         'Access-Control-Allow-Methods',
