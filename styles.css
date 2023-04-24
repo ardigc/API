@@ -6,3 +6,6 @@
 .grid-products{
     display: grid;
 }
+.product-box{
+    display: flex;
+}

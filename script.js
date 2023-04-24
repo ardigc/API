@@ -18,8 +18,13 @@ button.addEventListener('click', async () => {
       async function main() {
           const products = await getProduct()
           console.log(products)
-          return products
+          const gridProduct = document.querySelector('.grid-products')
+          const prod = products.map(createProduct)
+          gridProduct.append(...prod);
         }
+function createProduct(product) {
+    const productBox = createElement('div', 'product-box',)
+}
         main()
     
 function createElement(tag, styles, content) {
