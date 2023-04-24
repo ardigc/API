@@ -262,9 +262,17 @@ app.post('/api/shopping', async (req, res) => {
     if (txt.length===0) {
         fs.writeFile(pathName, JSON.stringify([msg]))
     } else {
-    console.log(txt)
-    const data = JSON.parse(txt)
-    const newFile = data.push(msg)
+    // console.log(txt)
+    const data = JSON.parse(txt)    
+    const ident = data.find((element) => element.id === msg.id);
+    const index = data.findIndex((element) => element.id === msg.id);
+    // console.log(!ident)
+    if (!!ident === true) {
+      data[index].qt++;
+    } else {
+      const newData = data.push(msg);
+    }
+    // const newFile = data.push(msg)
     // const newFile = `${data}
 // ${msg}`;
     fs.writeFile(pathName, JSON.stringify(data));
