@@ -4,7 +4,11 @@ const id= search.get("id");
 console.log(id)
 // const button = document.querySelector('.btn');
 const saveBtn = document.querySelector('.save');
-
+const intro = document.querySelector('.intro')
+intro.append(createElement('a','','Volver al inicio'))
+intro.addEventListener('click',()=>{
+  window.location.assign(window.location.origin)
+})
 // button.addEventListener('click', async () => {
 //     const request = await fetch('/api/message');
 //     const message = await request.text();
