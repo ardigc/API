@@ -253,6 +253,25 @@ ${msg}`;
     );
     res.send('Mandado desde la api');
 });
+app.post('/api/shopping', async (req, res) => {
+    const msg = req.body.message;
+    const pathName = path.join(__dirname, 'cart.txt');
+    const file = await fs.readFile(pathName);
+    const txt = file.toString('utf8');
+    const newText = `${txt}
+${msg}`;
+    fs.writeFile(pathName, newText);
+    res.statusCode = 200;
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    );
+    res.send('Mandado desde la api');
+});
 
 app.listen(3000, () => {
     console.log('Listening on port 3000');

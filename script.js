@@ -5,11 +5,11 @@ console.log(id)
 // const button = document.querySelector('.btn');
 const saveBtn = document.querySelector('.save');
 
-button.addEventListener('click', async () => {
-    const request = await fetch('/api/message');
-    const message = await request.text();
-    alert(message);
-});
+// button.addEventListener('click', async () => {
+//     const request = await fetch('/api/message');
+//     const message = await request.text();
+//     alert(message);
+// });
 //   Deteniendo ejecución
 if (!id === !null) {
   async function getProduct() {
@@ -59,7 +59,6 @@ main()
           const prod = createProduct(productsID)
           gridProduct.append(prod);
           function createProduct(product) {
-          const buyButton = document.querySelector('.buy-button');
             const productBox = createElement('div', 'product-box',);
             const nameBox = createElement('div', 'name-box', product.name)
             const descriptionBox = createElement('div', 'item-box', product.description)
@@ -70,8 +69,16 @@ main()
             productBox.append(descriptionBox)
             productBox.append(priceBox)
             productBox.append(buttonBox)
-            buyButton.addEventListener("click", async (ev) => {
-
+            button.addEventListener("click", async (ev) => {
+              const request = await fetch('/api/shopping', {
+                method: 'POST',
+                body: JSON.stringify({ message: product }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                },
+            });
+            const message = await request.text();
             })
             return productBox
         }
@@ -92,15 +99,15 @@ function createElement(tag, styles, content) {
     }
     return element;
   }
-// saveBtn.addEventListener('click', async () => {
-//     const request = await fetch('/api/save', {
-//         method: 'POST',
-//         body: JSON.stringify({ message: Math.random().toString(36) }),
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Access-Control-Allow-Origin': '*',
-//         },
-//     });
-//     const message = await request.text();
-//     console.log(message);
-// });
+saveBtn.addEventListener('click', async () => {
+    const request = await fetch('/api/save', {
+        method: 'POST',
+        body: JSON.stringify({ message: Math.random().toString(36) }),
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+        },
+    });
+    const message = await request.text();
+    console.log(message);
+});
