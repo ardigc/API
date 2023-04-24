@@ -6,7 +6,7 @@ const products = [
         description:
         'New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016',
         qt: 1,
-        ide: 1,
+        id: 1,
     },
     {
         name: 'Refined Metal Towels',
@@ -14,7 +14,7 @@ const products = [
         description:
             'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design',
         qt: 1,
-        ide: 2,
+        id: 2,
     },
     {
         name: 'Bespoke Cotton Bacon',
@@ -22,7 +22,7 @@ const products = [
         description:
             'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
         qt: 1,
-        ide: 3,
+        id: 3,
     },
     {
         name: 'Licensed Rubber Pants',
@@ -30,7 +30,7 @@ const products = [
         description:
             'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit',
         qt: 1,
-        ide: 4,
+        id: 4,
     },
     {
         name: 'Unbranded Fresh Cheese',
@@ -38,7 +38,7 @@ const products = [
         description:
             'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
         qt: 1,
-        ide: 5,
+        id: 5,
     },
     {
         name: 'Tasty Concrete Bacon',
@@ -46,7 +46,7 @@ const products = [
         description:
         'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart',
         qt: 1,
-        ide: 6,
+        id: 6,
     },
     {
         name: 'Oriental Concrete Soap',
@@ -54,7 +54,7 @@ const products = [
         description:
             'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
-        ide: 7,
+        id: 7,
     },
     {
         name: 'Recycled Fresh Gloves',
@@ -62,7 +62,7 @@ const products = [
         description:
             'The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality',
         qt: 1,
-        ide: 8,
+        id: 8,
     },
     {
         name: 'Fantastic Bronze Pants',
@@ -70,7 +70,7 @@ const products = [
         description:
         'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
-        ide: 9,
+        id: 9,
     },
     {
         name: 'Rustic Steel Hat',
@@ -78,7 +78,7 @@ const products = [
         description:
         'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
         qt: 1,
-        ide: 11,
+        id: 11,
     },
     {
         name: 'Rustic Soft Chips',
@@ -86,7 +86,7 @@ const products = [
         description:
         'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
-        ide: 12,
+        id: 12,
     },
     {
         name: 'Small Soft Computer',
@@ -94,7 +94,7 @@ const products = [
         description:
             'The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive',
         qt: 1,
-        ide: 13,
+        id: 13,
     },
     {
         name: 'Rustic Bronze Towels',
@@ -102,7 +102,7 @@ const products = [
         description:
             'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
             qt: 1,
-            ide: 14,
+            id: 14,
     },
     {
         name: 'Rustic Wooden Bacon',
@@ -110,7 +110,7 @@ const products = [
         description:
         'The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients',
         qt: 1,
-        ide: 15,
+        id: 15,
     },
     {
         name: 'Oriental Wooden Salad',
@@ -118,7 +118,7 @@ const products = [
         description:
             'New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart',
             qt: 1,
-            ide: 16,
+            id: 16,
         },
     {
         name: 'Luxurious Steel Pants',
@@ -126,7 +126,7 @@ const products = [
         description:
             'The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J',
         qt: 1,
-        ide: 17,
+        id: 17,
     },
     {
         name: 'Oriental Concrete Computer',
@@ -134,7 +134,7 @@ const products = [
         description:
             'The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design',
             qt: 1,
-            ide: 18,
+            id: 18,
         },
         {
             name: 'Unbranded Metal Shirt',
@@ -142,7 +142,7 @@ const products = [
             description:
             'The Football Is Good For Training And Recreational Purposes',
         qt: 1,
-        ide: 19,
+        id: 19,
     },
     {
         name: 'Luxurious Granite Mouse',
@@ -150,7 +150,7 @@ const products = [
         description:
         'Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals',
         qt: 1,
-        ide: 20,
+        id: 20,
     },
     {
         name: 'Incredible Rubber Salad',
@@ -158,7 +158,7 @@ const products = [
         description:
         'Carbonite web goalkeeper gloves are ergonomically designed to give easy fit',
         qt: 1,
-        ide: 21,
+        id: 21,
     },
 ];
 const express = require('express');
@@ -183,6 +183,13 @@ app.get('/script.js', async (req, res) => {
     const file = await fs.readFile(pathName);
     res.statusCode = 200;
     res.setHeader('content-type', 'application/javascript');
+    res.send(file);
+});
+app.get('/styles.css', async (req, res) => {
+    const pathName = path.join(__dirname, 'styles.css');
+    const file = await fs.readFile(pathName);
+    res.statusCode = 200;
+    res.setHeader('content-type', 'text/css');
     res.send(file);
 });
 

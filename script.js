@@ -23,7 +23,10 @@ button.addEventListener('click', async () => {
           gridProduct.append(...prod);
         }
 function createProduct(product) {
-    const productBox = createElement('div', 'product-box',)
+    const productBox = createElement('div', 'product-box',);
+    const nameBox = createElement('div', 'name-box', product.name)
+    productBox.append(nameBox)
+    return productBox
 }
         main()
     
