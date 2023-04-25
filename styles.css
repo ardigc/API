@@ -13,7 +13,7 @@ header{
     top: 0;
     color: white;
     height: 5rem;
-    width: 110vw;
+    width: 100vw;
     z-index: 1000000;
 }
 main{
@@ -21,10 +21,19 @@ main{
     top: 5rem;
     padding: 1rem;
 }
+h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .up-buttons{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    width: 90%;
+    grid-template-columns: 1fr 1fr 1fr;
     padding-bottom: 1rem;
+    justify-content: center;
+    align-items: center;
 }
 .cart-button{
 

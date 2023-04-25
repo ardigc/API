@@ -144,6 +144,7 @@ app.post('/api/empty', async (req, res) => {
         'Access-Control-Allow-Headers',
         'Content-Type, Authorization'
     );
+    res.send('Mandado desde la api');
 })
 app.post('/api/shopping', async (req, res) => {
     const msg = req.body.message;
