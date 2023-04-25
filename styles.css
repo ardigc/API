@@ -36,7 +36,6 @@ h1{
     align-items: center;
 }
 .cart-button{
-
     display: flex;
     justify-content: flex-end;
 }
@@ -74,6 +73,10 @@ h1{
 .button-box{
     display: flex;
     justify-content: flex-end;
+}
+button{
+    border-radius: 1rem;
+
 }
 .carrito{
     position: fixed;
