@@ -5,7 +5,7 @@ const id= search.get("id");
 // const button = document.querySelector('.btn');
 const saveBtn = document.querySelector('.save');
 const intro = document.querySelector('.intro')
-intro.append(createElement('a','','Volver al inicio'))
+intro.append(createElement('button','','Volver al inicio'))
 intro.addEventListener('click',()=>{
   window.location.assign(window.location.origin)
 })
@@ -15,6 +15,9 @@ intro.addEventListener('click',()=>{
 //     alert(message);
 // });
 //   Deteniendo ejecución
+const buttonCarrito = document.querySelector(".button-position");
+
+
 if (!id === !null) {
   async function getProduct() {
       const response = await fetch('/api/products', {
@@ -108,8 +111,8 @@ function createItem(item) {
   // console.log()
   return itemBox;
 }
+const showCarrito = document.querySelector(".carrito");
 function renderizarCarro(carrito) {
-  const showCarrito = document.querySelector(".carrito");
   const carritoList = carrito.map(createItem);
   showCarrito.append(...carritoList);
   let totalPrice = 0;
@@ -122,6 +125,15 @@ function renderizarCarro(carrito) {
     createElement("div", "total-price", "Total price is " + totalPrice + "€")
   );
 }
+buttonCarrito.addEventListener("click", (ev) => {
+  if (showCarrito.className.includes("fuera")) {
+    showCarrito.setAttribute("class", "carrito show");
+  } else if(showCarrito.className.includes("show")) {
+    showCarrito.setAttribute("class", "carrito hide-carrito");
+  } else{
+    showCarrito.setAttribute("class", "carrito show");
+  }
+});
 async function callCart() {
   const response = await fetch('/api/shopping', {
     method: 'GET',

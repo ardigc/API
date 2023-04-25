@@ -3,6 +3,31 @@
 ::after {
 	box-sizing: border-box;
 }
+header{
+    display: flex;
+    gap: 120px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(79, 118, 136);
+    position: fixed;
+    top: 0;
+    color: white;
+    height: 7rem;
+    width: 110vw;
+    z-index: 1000000;
+}
+main{
+    position: relative;
+top: 7rem;
+}
+.up-buttoons{
+    display: flex;
+}
+.button-position{
+    position: absolute;
+    top:0;
+    right: 10rem;
+}
 .grid-products{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -66,12 +91,15 @@
     justify-content: end;
     align-items: end;
 }
-.fuera{
-    
+.hide-carrito{
     width: 0px;
     z-index: 1;
     animation-name: carrito-compra-fuera;
     animation-duration: 0.5s;
+}
+.fuera{
+    width: 0px;
+    z-index: 1;
 }
 .show{
     width: 20rem;
