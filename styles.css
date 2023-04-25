@@ -19,14 +19,14 @@ header{
 main{
     position: relative;
 top: 7rem;
+padding: 1rem;
 }
-.up-buttoons{
+.up-buttons{
     display: flex;
 }
 .button-position{
-    position: absolute;
-    top:0;
-    right: 10rem;
+    display: flex;
+    position: relative;
 }
 .grid-products{
     display: grid;
