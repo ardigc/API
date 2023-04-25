@@ -89,6 +89,7 @@ main()
             // callCart()
             // console.log(message)
             })
+       
             return productBox
         }
           }
@@ -127,6 +128,19 @@ function renderizarCarro(carrito) {
   endBox.append(
     createElement("div", "total-price", "Total price is " + totalPrice + "€")
   );
+  buttonEmpty.addEventListener("click", async (ev) => {
+    const request = await fetch('/api/empty', {
+      method: 'POST',
+      body: JSON.stringify({ message:[]}),
+      headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+      },
+  });
+  const message = await request.text();
+  // callCart()
+  // console.log(message)
+  })
   showCarrito.append(endBox)
 }
 buttonCarrito.addEventListener("click", (ev) => {

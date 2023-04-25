@@ -131,6 +131,20 @@ app.get('/api/shopping', async (req, res) => {
     }
     
 })
+app.post('/api/empty', async (req, res) => {
+    const msg = req.body.message
+    const pathName = path.join(__dirname, 'cart.json');
+    fs.writeFile(pathName, JSON.stringify(msg))
+    res.statusCode = 200;
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    );
+})
 app.post('/api/shopping', async (req, res) => {
     const msg = req.body.message;
     // console.log(msg)
