@@ -22,11 +22,13 @@ top: 7rem;
 padding: 1rem;
 }
 .up-buttons{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
-.button-position{
+.cart-button{
+
     display: flex;
-    position: relative;
+    justify-content: flex-end;
 }
 .grid-products{
     display: grid;
