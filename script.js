@@ -120,10 +120,14 @@ function renderizarCarro(carrito) {
     const currentPrice = parseFloat(carrito[x].price);
     totalPrice = totalPrice + currentPrice * carrito[x].qt;
   }
+  const endBox = createElement('div', 'end-carrito',)
   // console.log(totalPrice)
-  showCarrito.append(
+  const buttonEmpty= createElement('button','empty-carrito', 'Vaciar carrito')
+  endBox.append(createElement('div','empty-button', buttonEmpty))
+  endBox.append(
     createElement("div", "total-price", "Total price is " + totalPrice + "€")
   );
+  showCarrito.append(endBox)
 }
 buttonCarrito.addEventListener("click", (ev) => {
   if (showCarrito.className.includes("fuera")) {
