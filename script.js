@@ -204,32 +204,36 @@ function sesion() {
   passwordInput.setAttribute("id", "password")
   passwordInput.setAttribute("type", "password")
   passwordInput.setAttribute("name", "password")
+  const submitInput = createElement("input","",)
+  submitInput.setAttribute("type","submit")
+  submitInput.setAttribute("value","Save")
   sesion.append(sesionBox);
   sesionBox.append(formBox)
   formBox.append(nameLabel)
   formBox.append(nameInput)
   formBox.append(passwordLabel)
   formBox.append(passwordInput)
+  formBox.append(submitInput);
+  if (formBox && formBox instanceof HTMLFormElement) {
+    formBox.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const data = new FormData(ev.target)
+      console.log(data.get("name"));
+      console.log(data.get("password"));
+    });
+  }
 }
 const openSesion = document.querySelector(".sesion-button")
 openSesion.addEventListener("click", ()=>{
   const sesionBox =document.getElementById("sesion")
-  console.log(sesionBox)
+  // console.log(sesionBox)
  if (!sesionBox) {
    sesion()
  } else {
   sesionBox.remove()
  }
 })
-const form = document.querySelector(".form-box");
-if (form && form instanceof HTMLFormElement) {
-  form.addEventListener("submit", (ev) => {
-    ev.preventDefault();
-    const data = new FormData(ev.target)
-    console.log(data.get("name"));
-    console.log(data.get("password"));
-  });
-}
+;
 
     function createElement(tag, styles, content) {
       const element = document.createElement(tag);
