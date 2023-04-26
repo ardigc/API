@@ -142,7 +142,6 @@ function renderizarCarro(carrito) {
   );
   showCarrito.append(endBox);
   buttonEmpty.addEventListener("click", async (ev) => {
-    showCarrito.innerHTML = " ";
     const request = await fetch("/api/empty", {
       method: "POST",
       body: JSON.stringify({ message: [] }),
@@ -152,6 +151,7 @@ function renderizarCarro(carrito) {
       },
     });
     const message = await request.text();
+    showCarrito.innerHTML = " ";
     callCart();
   });
 }
