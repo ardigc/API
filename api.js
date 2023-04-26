@@ -181,6 +181,38 @@ app.post('/api/shopping', async (req, res) => {
     );
     res.send('Mandado desde la api');
 });
+app.post('/api/singIn', async (req, res) => {
+    const user = req.body;
+    const pathName = path.join(__dirname, 'users.json');
+    const file = await fs.readFile(pathName);
+    const txt = file.toString('utf8');
+    if (txt.length>1) {
+        const data = JSON.parse(txt)    
+        const ident = data.find((element) => element.id === user.id);
+        const index = data.findIndex((element) => element.id === user.id);
+        if (!!ident === true) {
+            // retornar ID
+        //   data[index].qt++;
+        } else {
+            user.id = data.length;
+          const newData = data.push(user);
+        }
+        fs.writeFile(pathName, JSON.stringify(data));
+    } else {
+        user.id = 0;
+        fs.writeFile(pathName, JSON.stringify([user]))
+    }
+    res.statusCode = 200;
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PUT, DELETE, OPTIONS'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    );
+    res.send('Mandado desde la api');
+});
 
 app.listen(3000, () => {
     console.log('Listening on port 3000');
