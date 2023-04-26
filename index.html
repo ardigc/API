@@ -18,14 +18,23 @@
       <div class="intro"></div>
       <h1>Mi tienda</h1>
       <div class="cart-button">
-        <div>
-          <button class="sesion-button">Iniciar Sesion</button>
+          <div class="sesion-dad">
+            <button class="sesion-button">Iniciar Sesion</button>
+          </div>
           <button class="button-position">Ver carrito</button>
-        </div>
       </div>
     </div>
   </header>
   <main>
+    <div>
+      <form id = "form-pru" action="" method="post">
+        <label for="POST-name">Nombre:</label>
+        <input id="POST-name" type="text" name="name">
+        <label for="POST-password">Password:</label>
+        <input id="POST-password" type="password" name="password">
+        <input type="submit" value="Save">
+      </form>
+    </div>
     <div class="carrito fuera">
     </div>
     <div class="grid-products"></div>

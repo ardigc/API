@@ -35,6 +35,16 @@ h1{
     justify-content: center;
     align-items: center;
 }
+.sesion-dad{
+position: relative;
+}
+.sesion-box{
+position: absolute;
+background-color: blueviolet;
+border-radius: 1rem;
+border: solid 1px black;
+padding: 1rem;
+}
 .cart-button{
     display: flex;
     justify-content: flex-end;
