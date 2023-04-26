@@ -218,10 +218,14 @@ function sesion() {
     formBox.addEventListener("submit", (ev) => {
       ev.preventDefault();
       const data = new FormData(ev.target)
+      singIn(data)
       console.log(data.get("name"));
       console.log(data.get("password"));
     });
   }
+}
+function singIn(data) {
+  console.log(data)  
 }
 const openSesion = document.querySelector(".sesion-button")
 openSesion.addEventListener("click", ()=>{
