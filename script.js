@@ -60,7 +60,7 @@ if (!id === !null) {
     const body = await response.json();
     return body;
   }
-
+const endSesion= document.getElementById("close-sesion")
   async function prueba() {
     const productsID = await getProductID();
     // console.log(productsID)
@@ -240,8 +240,10 @@ async function singIn(data) {
   if (request.ok) {
     const message = await request.json();
     console.log(message);
-    document.cookie = "id=" + encodeURIComponent(message.id);
-    document.cookie = "name="+ encodeURIComponent(user.name);
+    // const pruebaCookie = JSON.stringify({id: message.id, name: user.name});
+    document.cookie = "id=" + encodeURIComponent(message.id)
+    document.cookie = "name=" + encodeURIComponent(user.name)
+    console.log(decodeURIComponent(document.cookie))
     window.location.assign("/")
   } else {
     alert("Usuario incorrecto");
