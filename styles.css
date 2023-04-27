@@ -29,7 +29,7 @@ h1{
 .up-buttons{
     display: grid;
     height: 100%;
-    width: 90%;
+    width: 95%;
     grid-template-columns: 1fr 1fr 1fr;
     padding-bottom: 1rem;
     justify-content: center;
