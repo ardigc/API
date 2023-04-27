@@ -101,26 +101,62 @@ app.get("/api/shopping", async (req, res) => {
   const pathName = path.join(__dirname, "cart.json");
   const file = await fs.readFile(pathName);
   const txt = file.toString("utf8");
-  const id = req.cookies.id
-  const data = JSON.parse(txt);
-  const user = data.find((element) => element.id === id);
-  console.log(user)
+  const id = req.cookies.id;
+  //   console.log(id);
   
-  if (user.carro.length === 0) {
+  if (!id) {
     const emp = [];
     res.statusCode = 200;
     res.setHeader("Access-Control-Allow-Methods", "GET");
     res.send(emp);
   } else {
-    res.statusCode = 200;
-    res.setHeader("Access-Control-Allow-Methods", "GET");
-    res.send(user.carro);
-}
+    if (txt.length <= 2) {
+      const emp = [];
+      res.statusCode = 200;
+      res.setHeader("Access-Control-Allow-Methods", "GET");
+      res.send(emp);
+    } else {
+      const data = JSON.parse(txt);
+      const user = data.find((element) => element.id === id);
+      console.log(id)
+      if (!user) {
+        const emp = [];
+        res.statusCode = 200;
+        res.setHeader("Access-Control-Allow-Methods", "GET");
+        res.send(emp);
+    } else if (user.carro.length === 0){
+        const emp = [];
+        res.statusCode = 200;
+        res.setHeader("Access-Control-Allow-Methods", "GET");
+        res.send(emp);
+      }else {
+        console.log(data);
+        res.statusCode = 200;
+        res.setHeader("Access-Control-Allow-Methods", "GET");
+        res.send(user.carro);
+      }
+    }
+  }
 });
 app.post("/api/empty", async (req, res) => {
   const msg = req.body.message;
+  const id = req.cookies.id;
   const pathName = path.join(__dirname, "cart.json");
-  fs.writeFile(pathName, JSON.stringify(msg));
+  const file = await fs.readFile(pathName);
+  const txt = file.toString("utf8");
+  const data = JSON.parse(txt);
+  const user = data.find((element) => element.id === req.cookies.id);
+  const userIndex = data.findIndex(
+    (element) => element.id === req.cookies.id
+  );
+  if (!!user) {
+    const index = data[userIndex].carro.findIndex(
+      (element) => element.id === msg.id
+    );
+    data[userIndex].carro = msg
+  fs.writeFile(pathName, JSON.stringify(data));
+}
+
   res.statusCode = 200;
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -136,10 +172,10 @@ app.post("/api/shopping", async (req, res) => {
   const file = await fs.readFile(pathName);
   const txt = file.toString("utf8");
   if (txt.length === 0) {
+      fs.writeFile(pathName, JSON.stringify(cart));
+    } else {
     cart = [{ id: req.cookies.id, carro: [msg] }];
     // console.log(cart);
-    fs.writeFile(pathName, JSON.stringify(cart));
-  } else {
     const data = JSON.parse(txt);
     const user = data.find((element) => element.id === req.cookies.id);
     const userIndex = data.findIndex(
@@ -154,7 +190,7 @@ app.post("/api/shopping", async (req, res) => {
       );
       // console.log(!ident)
       // si no existe retorna -1
-    //   console.log(index);
+      //   console.log(index);
       if (index >= 0) {
         data[userIndex].carro[index].qt++;
       } else {
@@ -188,9 +224,9 @@ app.post("/api/singIn", async (req, res) => {
   const txt = file.toString("utf8");
   // if (txt.length>1) {
   const data = JSON.parse(txt);
-//   console.log(data);
+  //   console.log(data);
   const ident = data.find((element) => element.name === user.name);
-//   console.log(!!ident);
+  //   console.log(!!ident);
   if (!ident) {
     res.statusCode = 401;
     res.setHeader(

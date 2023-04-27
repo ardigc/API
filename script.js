@@ -105,10 +105,10 @@ if (!id === !null) {
 }
 const endSesion= document.getElementById("close-sesion");
 endSesion.addEventListener("click", (ev)=>{
+  alert('Adios!')
   document.cookie="id= ; expires=Thu, 01 Jan 1970 00:00:00 UTC"
   document.cookie="name= ; expires=Thu, 01 Jan 1970 00:00:00 UTC"
   window.location.assign("/")
-  alert('Adios!')
 })
 function createItem(item) {
   // console.log(item);
