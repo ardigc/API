@@ -60,7 +60,7 @@ if (!id === !null) {
     const body = await response.json();
     return body;
   }
-const endSesion= document.getElementById("close-sesion")
+
   async function prueba() {
     const productsID = await getProductID();
     // console.log(productsID)
@@ -103,7 +103,13 @@ const endSesion= document.getElementById("close-sesion")
   }
   prueba();
 }
-
+const endSesion= document.getElementById("close-sesion");
+endSesion.addEventListener("click", (ev)=>{
+  document.cookie="id= ; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+  document.cookie="name= ; expires=Thu, 01 Jan 1970 00:00:00 UTC"
+  window.location.assign("/")
+  alert('Adios!')
+})
 function createItem(item) {
   // console.log(item);
   const nameBox = createElement("div", "item-name", item.name);
