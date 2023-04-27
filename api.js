@@ -186,22 +186,24 @@ app.post('/api/singIn', async (req, res) => {
     const pathName = path.join(__dirname, 'users.json');
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');
-    if (txt.length>1) {
-        const data = JSON.parse(txt)    
-        const ident = data.find((element) => element.id === user.id);
-        const index = data.findIndex((element) => element.id === user.id);
-        if (!!ident === true) {
+    // if (txt.length>1) {
+        const data = JSON.parse(txt) 
+        console.log(data) 
+        const ident = data.find((element) => element.name === user.name);
+        console.log(ident)
+        // const index = data.findIndex((element) => element.id === user.id);
+        // if (!!ident === true) {
             // retornar ID
         //   data[index].qt++;
-        } else {
-            user.id = data.length;
-          const newData = data.push(user);
-        }
+        // } else {
+            // user.id = data.length;
+        //   const newData = data.push(user);
+        // }
         fs.writeFile(pathName, JSON.stringify(data));
-    } else {
-        user.id = 0;
-        fs.writeFile(pathName, JSON.stringify([user]))
-    }
+    // } else {
+        // user.id = 0;
+        // fs.writeFile(pathName, JSON.stringify([user]))
+    // }
     res.statusCode = 200;
     res.setHeader(
         'Access-Control-Allow-Methods',
