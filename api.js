@@ -42,10 +42,10 @@ app.get('/api/message', (req, res) => {
     res.send('Mandado desde la api');
 });
 app.get('/api/products/', async (req, res) => {
-    const pathName =path.join(__dirname, 'products.json')
+    const pathName = path.join(__dirname, 'products.json')
     const file = await fs.readFile(pathName)
     const txt = file.toString('utf8');
-    const data = JSON.parse(txt) 
+    const data = JSON.parse(txt)
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Methods', 'GET');
     res.setHeader(
@@ -57,7 +57,7 @@ app.get('/api/products/', async (req, res) => {
     res.send(data);
 });
 // app.get('/api/products/', (req, res) => {
-    
+
 //     res.statusCode = 200;
 //     res.setHeader('Access-Control-Allow-Methods', 'GET');
 //     res.setHeader(
@@ -68,11 +68,11 @@ app.get('/api/products/', async (req, res) => {
 //     res.send(JSON.stringify(products));
 // });
 app.get('/api/products/:id', async (req, res) => {
-    const pathName =path.join(__dirname, 'products.json')
+    const pathName = path.join(__dirname, 'products.json')
     const file = await fs.readFile(pathName)
     const txt = file.toString('utf8');
-    const data = JSON.parse(txt) 
-    const id = req.params.id 
+    const data = JSON.parse(txt)
+    const id = req.params.id
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Methods', 'GET');
     res.setHeader(
@@ -114,22 +114,22 @@ app.get('/api/shopping', async (req, res) => {
     const pathName = path.join(__dirname, 'cart.json');
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');
-    if (txt.length===0) {
+    if (txt.length === 0) {
         const data = []
         res.statusCode = 200;
         res.setHeader(
             'Access-Control-Allow-Methods',
-            'GET'); 
-            res.send(data);
-    } else{
-    const data = JSON.parse(txt) 
-    res.statusCode = 200;
-    res.setHeader(
-        'Access-Control-Allow-Methods',
-        'GET'); 
+            'GET');
+        res.send(data);
+    } else {
+        const data = JSON.parse(txt)
+        res.statusCode = 200;
+        res.setHeader(
+            'Access-Control-Allow-Methods',
+            'GET');
         res.send(data);
     }
-    
+
 })
 app.post('/api/empty', async (req, res) => {
     const msg = req.body.message
@@ -152,23 +152,23 @@ app.post('/api/shopping', async (req, res) => {
     const pathName = path.join(__dirname, 'cart.json');
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');
-    if (txt.length===0) {
+    if (txt.length === 0) {
         fs.writeFile(pathName, JSON.stringify([msg]))
     } else {
-    // console.log(txt)
-    const data = JSON.parse(txt)    
-    const ident = data.find((element) => element.id === msg.id);
-    const index = data.findIndex((element) => element.id === msg.id);
-    // console.log(!ident)
-    if (!!ident === true) {
-      data[index].qt++;
-    } else {
-      const newData = data.push(msg);
-    }
-    // const newFile = data.push(msg)
-    // const newFile = `${data}
-// ${msg}`;
-    fs.writeFile(pathName, JSON.stringify(data));
+        // console.log(txt)
+        const data = JSON.parse(txt)
+        const ident = data.find((element) => element.id === msg.id);
+        const index = data.findIndex((element) => element.id === msg.id);
+        // console.log(!ident)
+        if (!!ident === true) {
+            data[index].qt++;
+        } else {
+            const newData = data.push(msg);
+        }
+        // const newFile = data.push(msg)
+        // const newFile = `${data}
+        // ${msg}`;
+        fs.writeFile(pathName, JSON.stringify(data));
     }
     res.statusCode = 200;
     res.setHeader(
@@ -187,33 +187,48 @@ app.post('/api/singIn', async (req, res) => {
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');
     // if (txt.length>1) {
-        const data = JSON.parse(txt) 
-        console.log(data) 
-        const ident = data.find((element) => element.name === user.name);
-        console.log(ident)
-        // const index = data.findIndex((element) => element.id === user.id);
-        // if (!!ident === true) {
-            // retornar ID
-        //   data[index].qt++;
-        // } else {
-            // user.id = data.length;
-        //   const newData = data.push(user);
-        // }
-        fs.writeFile(pathName, JSON.stringify(data));
+    const data = JSON.parse(txt)
+    console.log(data)
+    const ident = data.find((element) => element.name === user.name);
+    if (ident.password === user.password) {
+
+        res.statusCode = 200;
+        res.setHeader(
+            'Access-Control-Allow-Methods',
+            'GET, POST, PUT, DELETE, OPTIONS'
+        );
+        res.setHeader(
+            'Access-Control-Allow-Headers',
+            'Content-Type, Authorization'
+        );
+        res.send(user);
+        
+    } else {
+        res.statusCode = 200;
+        res.setHeader(
+            'Access-Control-Allow-Methods',
+            'GET, POST, PUT, DELETE, OPTIONS'
+        );
+        res.setHeader(
+            'Access-Control-Allow-Headers',
+            'Content-Type, Authorization'
+        );
+        res.send('Creedenciales incorrectas');
+
+    }
+    // const index = data.findIndex((element) => element.id === user.id);
+    // if (!!ident === true) {
+    // retornar ID
+    //   data[index].qt++;
     // } else {
-        // user.id = 0;
-        // fs.writeFile(pathName, JSON.stringify([user]))
+    // user.id = data.length;
+    //   const newData = data.push(user);
     // }
-    res.statusCode = 200;
-    res.setHeader(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PUT, DELETE, OPTIONS'
-    );
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Content-Type, Authorization'
-    );
-    res.send('Mandado desde la api');
+    // fs.writeFile(pathName, JSON.stringify(data));
+    // } else {
+    // user.id = 0;
+    // fs.writeFile(pathName, JSON.stringify([user]))
+    // }
 });
 
 app.listen(3000, () => {

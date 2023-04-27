@@ -238,8 +238,8 @@ async function singIn(data) {
       "Access-Control-Allow-Origin": "*",
     },
   });
-        const message = await request.text();
-
+        const message = await request.body;
+console.log(message)
 }
 const openSesion = document.querySelector(".sesion-button")
 openSesion.addEventListener("click", ()=>{
