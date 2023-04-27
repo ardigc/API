@@ -101,17 +101,21 @@ app.get("/api/shopping", async (req, res) => {
   const pathName = path.join(__dirname, "cart.json");
   const file = await fs.readFile(pathName);
   const txt = file.toString("utf8");
-  if (txt.length === 0) {
-    const data = [];
+  const id = req.cookies.id
+  const data = JSON.parse(txt);
+  const user = data.find((element) => element.id === id);
+  console.log(user)
+  
+  if (user.carro.length === 0) {
+    const emp = [];
     res.statusCode = 200;
     res.setHeader("Access-Control-Allow-Methods", "GET");
-    res.send(data);
+    res.send(emp);
   } else {
-    const data = JSON.parse(txt);
     res.statusCode = 200;
     res.setHeader("Access-Control-Allow-Methods", "GET");
-    res.send(data);
-  }
+    res.send(user.carro);
+}
 });
 app.post("/api/empty", async (req, res) => {
   const msg = req.body.message;
