@@ -3,10 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs/promises');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.get('/', async (req, res) => {
     const pathName = path.join(__dirname, 'index.html');
@@ -153,7 +155,9 @@ app.post('/api/shopping', async (req, res) => {
     const file = await fs.readFile(pathName);
     const txt = file.toString('utf8');
     if (txt.length === 0) {
-        fs.writeFile(pathName, JSON.stringify([msg]))
+        cartId= {id: req.cookies.id, carro: [msg]};
+        console.log(cartId)
+        fs.writeFile(pathName, JSON.stringify(cartId))
     } else {
         // console.log(txt)
         const data = JSON.parse(txt)
@@ -179,6 +183,7 @@ app.post('/api/shopping', async (req, res) => {
         'Access-Control-Allow-Headers',
         'Content-Type, Authorization'
     );
+    console.log("User id :  ", req.cookies.id);
     res.send('Mandado desde la api');
 });
 app.post('/api/singIn', async (req, res) => {
@@ -190,21 +195,9 @@ app.post('/api/singIn', async (req, res) => {
     const data = JSON.parse(txt)
     console.log(data)
     const ident = data.find((element) => element.name === user.name);
-    if (ident.password === user.password) {
-
-        res.statusCode = 200;
-        res.setHeader(
-            'Access-Control-Allow-Methods',
-            'GET, POST, PUT, DELETE, OPTIONS'
-        );
-        res.setHeader(
-            'Access-Control-Allow-Headers',
-            'Content-Type, Authorization'
-        );
-        res.send(user);
-        
-    } else {
-        res.statusCode = 200;
+    console.log(!!ident)
+    if (!ident) {
+        res.statusCode = 401;
         res.setHeader(
             'Access-Control-Allow-Methods',
             'GET, POST, PUT, DELETE, OPTIONS'
@@ -214,7 +207,36 @@ app.post('/api/singIn', async (req, res) => {
             'Content-Type, Authorization'
         );
         res.send('Creedenciales incorrectas');
-
+    } else {
+        if (ident.password === user.password) {
+    
+            res.statusCode = 200;
+            res.setHeader(
+                'Access-Control-Allow-Methods',
+                'GET, POST, PUT, DELETE, OPTIONS'
+            );
+            res.setHeader(
+                'Access-Control-Allow-Headers',
+                'Content-Type, Authorization'
+            );
+            const id = JSON.stringify({id: ident.id})
+            console.log(id)
+            res.send(id);
+            
+        } else {
+            res.statusCode = 401;
+            res.setHeader(
+                'Access-Control-Allow-Methods',
+                'GET, POST, PUT, DELETE, OPTIONS'
+            );
+            res.setHeader(
+                'Access-Control-Allow-Headers',
+                'Content-Type, Authorization'
+            );
+            res.send('Creedenciales incorrectas');
+    
+        }
+        
     }
     // const index = data.findIndex((element) => element.id === user.id);
     // if (!!ident === true) {

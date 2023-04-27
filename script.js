@@ -238,8 +238,13 @@ async function singIn(data) {
       "Access-Control-Allow-Origin": "*",
     },
   });
-        const message = await request.body;
+  if (request.ok) {
+    const message = await request.json()
 console.log(message)
+document.cookie= "id="+ encodeURIComponent(message.id);
+  } else {
+    alert('Usuario incorrecto')
+  }
 }
 const openSesion = document.querySelector(".sesion-button")
 openSesion.addEventListener("click", ()=>{
