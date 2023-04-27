@@ -241,6 +241,7 @@ async function singIn(data) {
     const message = await request.json();
     console.log(message);
     document.cookie = "id=" + encodeURIComponent(message.id);
+    document.cookie = "name="+ encodeURIComponent(user.name);
     window.location.assign("/")
   } else {
     alert("Usuario incorrecto");
