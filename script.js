@@ -97,7 +97,7 @@ if (!id === !null) {
         callCart();
         // console.log(message)
       });
-      
+
       return productBox;
     }
   }
@@ -112,124 +112,123 @@ function createItem(item) {
     "div",
     "item-price",
     "Unidades " + item.qt + "   " + item.price + "€"
-    );
-    const itemBox = createElement("div", "item-box");
-    itemBox.append(nameBox);
-    // itemBox.append(descriptionBox);
-    itemBox.append(priceBox);
-    // console.log()
-    return itemBox;
+  );
+  const itemBox = createElement("div", "item-box");
+  itemBox.append(nameBox);
+  // itemBox.append(descriptionBox);
+  itemBox.append(priceBox);
+  // console.log()
+  return itemBox;
+}
+const showCarrito = document.querySelector(".carrito");
+function renderizarCarro(carrito) {
+  const carritoList = carrito.map(createItem);
+  showCarrito.append(...carritoList);
+  let totalPrice = 0;
+  for (let x = 0; x < carrito.length; x++) {
+    const currentPrice = parseFloat(carrito[x].price);
+    totalPrice = totalPrice + currentPrice * carrito[x].qt;
   }
-  const showCarrito = document.querySelector(".carrito");
-  function renderizarCarro(carrito) {
-    const carritoList = carrito.map(createItem);
-    showCarrito.append(...carritoList);
-    let totalPrice = 0;
-    for (let x = 0; x < carrito.length; x++) {
-      const currentPrice = parseFloat(carrito[x].price);
-      totalPrice = totalPrice + currentPrice * carrito[x].qt;
-    }
-    const endBox = createElement("div", "end-carrito");
-    // console.log(totalPrice)
-    const buttonEmpty = createElement(
-      "button",
-      "empty-carrito",
-      "Vaciar carrito"
-      );
-      endBox.append(createElement("div", "empty-button", buttonEmpty));
-      endBox.append(
-        createElement("div", "total-price", "Total price is " + totalPrice + "€")
-        );
-        showCarrito.append(endBox);
-        buttonEmpty.addEventListener("click", async (ev) => {
-          const request = await fetch("/api/empty", {
-            method: "POST",
-            body: JSON.stringify({ message: [] }),
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-          });
-          const message = await request.text();
-        showCarrito.innerHTML = " ";
-        callCart();
-      });
-    }
-    buttonCarrito.addEventListener("click", (ev) => {
-      if (showCarrito.className.includes("fuera")) {
-        showCarrito.setAttribute("class", "carrito show");
-      } else if (showCarrito.className.includes("show")) {
-        showCarrito.setAttribute("class", "carrito hide-carrito");
-      } else {
-        showCarrito.setAttribute("class", "carrito show");
-      }
+  const endBox = createElement("div", "end-carrito");
+  // console.log(totalPrice)
+  const buttonEmpty = createElement(
+    "button",
+    "empty-carrito",
+    "Vaciar carrito"
+  );
+  endBox.append(createElement("div", "empty-button", buttonEmpty));
+  endBox.append(
+    createElement("div", "total-price", "Total price is " + totalPrice + "€")
+  );
+  showCarrito.append(endBox);
+  buttonEmpty.addEventListener("click", async (ev) => {
+    const request = await fetch("/api/empty", {
+      method: "POST",
+      body: JSON.stringify({ message: [] }),
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
-    async function callCart() {
-      const response = await fetch("/api/shopping", {
-        method: "GET",
-      });
-      const body = await response.json();
-      renderizarCarro(body);
-      return body;
-    }
+    const message = await request.text();
+    showCarrito.innerHTML = " ";
     callCart();
-    
-    
-    saveBtn.addEventListener("click", async () => {
-      const request = await fetch("/api/save", {
-        method: "POST",
-        body: JSON.stringify({ message: Math.random().toString(36) }),
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      });
-      const message = await request.text();
-      // console.log(message);
-    });
-    function sesion() {
-      const sesion = document.querySelector(".sesion-dad");
-      const sesionBox = createElement("div", "sesion-box");
-      sesionBox.setAttribute("id", "sesion")
-      const formBox = createElement("form", "form-box",)
-      const nameLabel = createElement("label","","Nombre:")
-      nameLabel.setAttribute("for", "name")
-      const nameInput = createElement("input","",)
-      nameInput.setAttribute("id", "name")
-      nameInput.setAttribute("type", "text")
-      nameInput.setAttribute("name", "name")
-      const passwordLabel = createElement("label","","Password:")
-      passwordLabel.setAttribute("for", "password")
-      const passwordInput = createElement("input","",)
-      passwordInput.setAttribute("id", "password")
-      passwordInput.setAttribute("type", "password")
-      passwordInput.setAttribute("name", "password")
-      const submitInput = createElement("input","",)
-  submitInput.setAttribute("type","submit")
-  submitInput.setAttribute("value","Save")
+  });
+}
+buttonCarrito.addEventListener("click", (ev) => {
+  if (showCarrito.className.includes("fuera")) {
+    showCarrito.setAttribute("class", "carrito show");
+  } else if (showCarrito.className.includes("show")) {
+    showCarrito.setAttribute("class", "carrito hide-carrito");
+  } else {
+    showCarrito.setAttribute("class", "carrito show");
+  }
+});
+async function callCart() {
+  const response = await fetch("/api/shopping", {
+    method: "GET",
+  });
+  const body = await response.json();
+  renderizarCarro(body);
+  return body;
+}
+callCart();
+
+saveBtn.addEventListener("click", async () => {
+  const request = await fetch("/api/save", {
+    method: "POST",
+    body: JSON.stringify({ message: Math.random().toString(36) }),
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  const message = await request.text();
+  // console.log(message);
+});
+function sesion() {
+  const sesion = document.querySelector(".sesion-dad");
+  const sesionBox = createElement("div", "sesion-box");
+  sesionBox.setAttribute("id", "sesion");
+  const formBox = createElement("form", "form-box");
+  const nameLabel = createElement("label", "", "Nombre:");
+  nameLabel.setAttribute("for", "name");
+  const nameInput = createElement("input", "");
+  nameInput.setAttribute("id", "name");
+  nameInput.setAttribute("type", "text");
+  nameInput.setAttribute("name", "name");
+  const passwordLabel = createElement("label", "", "Password:");
+  passwordLabel.setAttribute("for", "password");
+  const passwordInput = createElement("input", "");
+  passwordInput.setAttribute("id", "password");
+  passwordInput.setAttribute("type", "password");
+  passwordInput.setAttribute("name", "password");
+  const submitInput = createElement("input", "");
+  submitInput.setAttribute("type", "submit");
+  submitInput.setAttribute("value", "Save");
   sesion.append(sesionBox);
-  sesionBox.append(formBox)
-  formBox.append(nameLabel)
-  formBox.append(nameInput)
-  formBox.append(passwordLabel)
-  formBox.append(passwordInput)
+  sesionBox.append(formBox);
+  formBox.append(nameLabel);
+  formBox.append(nameInput);
+  formBox.append(passwordLabel);
+  formBox.append(passwordInput);
   formBox.append(submitInput);
   if (formBox && formBox instanceof HTMLFormElement) {
     formBox.addEventListener("submit", (ev) => {
       ev.preventDefault();
-      const data = new FormData(ev.target)
-      singIn(data)
+      const data = new FormData(ev.target);
+      singIn(data);
       // console.log(data.get("name"));
       // console.log(data.get("password"));
     });
   }
 }
 async function singIn(data) {
-  const user ={
+  const user = {
     name: data.get("name"),
-    password: data.get("password")
-  }
-  console.log(user)  
+    password: data.get("password"),
+  };
+  console.log(user);
   const request = await fetch("/api/singIn", {
     method: "POST",
     body: JSON.stringify(user),
@@ -239,24 +238,23 @@ async function singIn(data) {
     },
   });
   if (request.ok) {
-    const message = await request.json()
-console.log(message)
-document.cookie= "id="+ encodeURIComponent(message.id);
+    const message = await request.json();
+    console.log(message);
+    document.cookie = "id=" + encodeURIComponent(message.id);
   } else {
-    alert('Usuario incorrecto')
+    alert("Usuario incorrecto");
   }
 }
-const openSesion = document.querySelector(".sesion-button")
-openSesion.addEventListener("click", ()=>{
-  const sesionBox =document.getElementById("sesion")
+const openSesion = document.querySelector(".sesion-button");
+openSesion.addEventListener("click", () => {
+  const sesionBox = document.getElementById("sesion");
   // console.log(sesionBox)
   if (!sesionBox) {
-    sesion()
+    sesion();
   } else {
-    sesionBox.remove()
+    sesionBox.remove();
   }
-})
-;
+});
 
 function createElement(tag, styles, content) {
   const element = document.createElement(tag);
