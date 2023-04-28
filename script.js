@@ -103,13 +103,13 @@ if (!id === !null) {
   }
   prueba();
 }
-const endSesion= document.getElementById("close-sesion");
-endSesion.addEventListener("click", (ev)=>{
-  alert('Adios!')
-  document.cookie="id= ; expires=Thu, 01 Jan 1970 00:00:00 UTC"
-  document.cookie="name= ; expires=Thu, 01 Jan 1970 00:00:00 UTC"
-  window.location.assign("/")
-})
+const endSesion = document.getElementById("close-sesion");
+endSesion.addEventListener("click", (ev) => {
+  alert("Adios!");
+  document.cookie = "id= ; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "name= ; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  window.location.assign("/");
+});
 function createItem(item) {
   // console.log(item);
   const nameBox = createElement("div", "item-name", item.name);
@@ -247,10 +247,10 @@ async function singIn(data) {
     const message = await request.json();
     console.log(message);
     // const pruebaCookie = JSON.stringify({id: message.id, name: user.name});
-    document.cookie = "id=" + encodeURIComponent(message.id)
-    document.cookie = "name=" + encodeURIComponent(user.name)
-    console.log(decodeURIComponent(document.cookie))
-    window.location.assign("/")
+    document.cookie = "id=" + encodeURIComponent(message.id);
+    document.cookie = "name=" + encodeURIComponent(user.name);
+    console.log(decodeURIComponent(document.cookie));
+    window.location.assign("/");
   } else {
     alert("Usuario incorrecto");
   }

@@ -103,7 +103,7 @@ app.get("/api/shopping", async (req, res) => {
   const txt = file.toString("utf8");
   const id = req.cookies.id;
   //   console.log(id);
-  
+
   if (!id) {
     const emp = [];
     res.statusCode = 200;
@@ -118,18 +118,18 @@ app.get("/api/shopping", async (req, res) => {
     } else {
       const data = JSON.parse(txt);
       const user = data.find((element) => element.id === id);
-      console.log(id)
+      console.log(id);
       if (!user) {
         const emp = [];
         res.statusCode = 200;
         res.setHeader("Access-Control-Allow-Methods", "GET");
         res.send(emp);
-    } else if (user.carro.length === 0){
+      } else if (user.carro.length === 0) {
         const emp = [];
         res.statusCode = 200;
         res.setHeader("Access-Control-Allow-Methods", "GET");
         res.send(emp);
-      }else {
+      } else {
         console.log(data);
         res.statusCode = 200;
         res.setHeader("Access-Control-Allow-Methods", "GET");
@@ -146,16 +146,14 @@ app.post("/api/empty", async (req, res) => {
   const txt = file.toString("utf8");
   const data = JSON.parse(txt);
   const user = data.find((element) => element.id === req.cookies.id);
-  const userIndex = data.findIndex(
-    (element) => element.id === req.cookies.id
-  );
+  const userIndex = data.findIndex((element) => element.id === req.cookies.id);
   if (!!user) {
     const index = data[userIndex].carro.findIndex(
       (element) => element.id === msg.id
     );
-    data[userIndex].carro = msg
-  fs.writeFile(pathName, JSON.stringify(data));
-}
+    data[userIndex].carro = msg;
+    fs.writeFile(pathName, JSON.stringify(data));
+  }
 
   res.statusCode = 200;
   res.setHeader(
@@ -172,8 +170,8 @@ app.post("/api/shopping", async (req, res) => {
   const file = await fs.readFile(pathName);
   const txt = file.toString("utf8");
   if (txt.length === 0) {
-      fs.writeFile(pathName, JSON.stringify(cart));
-    } else {
+    fs.writeFile(pathName, JSON.stringify(cart));
+  } else {
     cart = [{ id: req.cookies.id, carro: [msg] }];
     // console.log(cart);
     const data = JSON.parse(txt);
